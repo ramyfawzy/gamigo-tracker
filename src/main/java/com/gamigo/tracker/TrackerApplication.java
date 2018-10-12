@@ -9,15 +9,8 @@ import org.springframework.context.ApplicationContext;
 @SpringBootApplication
 public class TrackerApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(TrackerApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(TrackerApplication.class, args);
-		ApplicationContext ctx = SpringApplication.run(TrackerApplication.class, args);
-		String[] beans = ctx.getBeanDefinitionNames();
-		for (String s : beans) {
-			log.debug(s);
-		}
-
 	}
 }
