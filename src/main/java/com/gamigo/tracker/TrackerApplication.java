@@ -13,11 +13,10 @@ public class TrackerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TrackerApplication.class, args);
-
 		ApplicationContext ctx = SpringApplication.run(TrackerApplication.class, args);
 		String[] beans = ctx.getBeanDefinitionNames();
 		for (String s : beans) {
-			log.info(s);
+			log.debug(s);
 		}
 
 	}
