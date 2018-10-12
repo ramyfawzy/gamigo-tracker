@@ -1,5 +1,6 @@
 package com.gamigo.tracker.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -44,15 +45,22 @@ public class EntryController {
 	@RequestMapping(value ="/*", method = RequestMethod.POST)
 	public Entry createEntry(@Valid @RequestBody Entry entry) {
 		entry.setId(ObjectId.get());
+		entry.setDownloadTime(new Date());
 		repository.save(entry);
 		return entry;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public void modifyEntryById(@PathVariable("id") ObjectId id, @Valid @RequestBody Entry entry) {
-		entry.setId(id);
-		repository.save(entry);
+	public void modifyEntry(@PathVariable("id") ObjectId id, @Valid @RequestBody Entry entry) {
+		Entry oldEntry = repository.findById(id);
+		if(oldEntry.getUserId() == null || (oldEntry.getUserId() != null && (entry.getUserId() != null && !oldEntry.getUserId().equals(entry.getUserId()) )   ) ) {
+			oldEntry.setUserId(entry.getUserId());
+		}
+		if(oldEntry.getGameKey() == null || (oldEntry.getGameKey() != null && (entry.getGameKey() != null && !oldEntry.getGameKey().equals(entry.getGameKey())))) {
+			oldEntry.setGameKey(entry.getGameKey());
+		}
+		repository.save(oldEntry);
 	}
 	
 	@ResponseBody

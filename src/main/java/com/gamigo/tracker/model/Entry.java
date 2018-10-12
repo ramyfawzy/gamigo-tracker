@@ -3,7 +3,6 @@ package com.gamigo.tracker.model;
 import java.util.Date;
 
 import org.bson.types.ObjectId;
-import org.joda.time.DateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
