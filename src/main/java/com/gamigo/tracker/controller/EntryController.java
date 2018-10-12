@@ -28,7 +28,7 @@ public class EntryController {
 	private EntryRepository repository;
 	
 	@ResponseBody
-	@RequestMapping(value ="/*", method = RequestMethod.GET)
+	@RequestMapping(value = {"/*",""}, method = RequestMethod.GET)
 	public List<Entry> getAllEntries() {
 		logger.debug("Reading all entries ...");
 		 return repository.findAll();
