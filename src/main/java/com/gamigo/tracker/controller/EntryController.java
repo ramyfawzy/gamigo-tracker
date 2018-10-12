@@ -28,7 +28,7 @@ public class EntryController {
 	private EntryRepository repository;
 	
 	@ResponseBody
-	@RequestMapping(value ="/", method = RequestMethod.GET)
+	@RequestMapping(value ="/*", method = RequestMethod.GET)
 	public List<Entry> getAllEntries() {
 		logger.debug("Reading all entries ...");
 		 return repository.findAll();
@@ -41,7 +41,7 @@ public class EntryController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value ="/", method = RequestMethod.POST)
+	@RequestMapping(value ="/*", method = RequestMethod.POST)
 	public Entry createEntry(@Valid @RequestBody Entry entry) {
 		entry.setId(ObjectId.get());
 		repository.save(entry);
