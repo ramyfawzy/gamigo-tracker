@@ -1,5 +1,6 @@
 package com.gamigo.tracker.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,15 +28,35 @@ public class EntryController {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	List<Entry> allEntries = new ArrayList<Entry>();
+	
 	@Autowired
 	private EntryRepository repository;
 	
+	@GetMapping(value = {"/*",""})
+	public String index(Model model) {
+		allEntries = repository.findAll();
+		model.addAttribute("entries", allEntries);
+		return "entry/entry.html";
+	}
+	
+	@GetMapping(value = {"/entries/charts"})
+	public String toCharts(Model model) {
+		return "entry/chart.html";
+	}
+	
 	@ResponseBody
-	@RequestMapping(value = {"/*",""}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/api/all"}, method = RequestMethod.GET)
 	public List<Entry> getAllEntries() {
 		logger.debug("Reading all entries ...");
 		 return repository.findAll();
 	}
+	
+	@GetMapping("/entriesView")
+    public String getAllEntries(Model model) {
+        model.addAttribute("entries", allEntries);
+        return "entry/entry.html";
+    }
 	
 	@ResponseBody
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)

@@ -18,6 +18,12 @@ public class Entry {
 	
 	private Date downloadTime;
 	
+	private Long duration;
+	
+	private String ip;
+	
+	private String country;
+	
 	private String gameKey;
 	
 	
@@ -28,10 +34,13 @@ public class Entry {
 	
 	
 
-	public Entry(ObjectId id, Long userId, Date downloadTime, String gameKey) {
+	public Entry(ObjectId id, Long userId, Date downloadTime, Long duration, String ip, String country, String gameKey) {
 		this.id = id;
 		this.userId = userId;
 		this.downloadTime = downloadTime;
+		this.duration = duration;
+		this.ip = ip;
+		this.country = country;
 		this.gameKey = gameKey;
 	}
 
@@ -61,6 +70,42 @@ public class Entry {
 		this.downloadTime = downloadTime;
 	}
 
+	public Long getDuration() {
+		return duration;
+	}
+
+
+
+	public void setDuration(Long duration) {
+		this.duration = duration;
+	}
+
+
+
+	public String getIp() {
+		return ip;
+	}
+
+
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+
+
+	public String getCountry() {
+		return country;
+	}
+
+
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+
+
 	public String getGameKey() {
 		return gameKey;
 	}
@@ -75,9 +120,11 @@ public class Entry {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Entry [id=").append(id).append(", userId=").append(userId).append(", downloadTime=")
-				.append(downloadTime).append(", gameKey=").append(gameKey).append("]");
+				.append(downloadTime).append(", duration=").append(duration).append(", ip=").append(ip)
+				.append(", country=").append(country).append(", gameKey=").append(gameKey).append("]");
 		return builder.toString();
 	}
+
 	
 	
 	
